@@ -43,7 +43,7 @@ client.on("message_create", async (msg) => {
         mentions.push(`${participant.id.user}@c.us`);
         text += `@${participant.id.user} `;
       }
-      text += `${msg.body}`;
+      text += `${msg.body.split("!everyone")[1].trim()}`;
       await chat.sendMessage(text, { mentions });
     }
   }

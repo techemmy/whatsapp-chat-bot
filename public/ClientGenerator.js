@@ -1,4 +1,4 @@
-const { Client, LocalAuth } = require("whatsapp-web.js");
+const { Client, LocalAuth, NoAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
 
 class ClientGenerator extends Client {
@@ -7,7 +7,13 @@ class ClientGenerator extends Client {
       puppeteer: {
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
       },
-      authStrategy: new LocalAuth({ clientId }),
+      webVersionCache: {
+        type: "remote",
+        remotePath:
+          "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2322.15.html",
+      },
+      // authStrategy: new LocalAuth({ clientId }),
+      authStrategy: new NoAuth(),
     });
 
     this.setUpConnection();
